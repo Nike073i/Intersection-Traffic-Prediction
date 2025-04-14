@@ -5,3 +5,4 @@ catboost_info
 exp
 **/__pycache__
 .vscode
+**/.env
