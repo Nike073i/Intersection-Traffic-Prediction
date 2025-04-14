@@ -1,0 +1,7 @@
+venv
+.ipynb_checkpoints
+bad
+catboost_info
+exp
+**/__pycache__
+.vscode
