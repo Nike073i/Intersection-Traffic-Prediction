@@ -1,0 +1,10 @@
+### Predict status
+
+POST http://localhost:8000/api/predicts/999
+Content-Type: application/json
+
+{ }
+
+### Get prediction status
+
+GET http://localhost:8000/api/predicts/999_07042025_2130
