@@ -1,0 +1,18 @@
+@startuml get-prediction
+
+actor Пользователь as User
+boundary    API    as API
+collections Cache as Cache
+
+User-> API : Получить статус прогноза по перекрестку Х
+API -> Cache
+
+alt Прогноз есть в кеше
+    API -> User: Данные по прогнозу
+
+else Прогноз еще не выполнялся
+    API -> User: Прогноз не найден
+
+end
+
+@enduml

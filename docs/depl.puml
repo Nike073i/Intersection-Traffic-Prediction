@@ -1,0 +1,33 @@
+@startuml depl
+
+node server {
+    agent API
+}
+
+node worker {
+    artifact regression_model
+    artifact classifier_model
+    agent prediction_worker
+}
+
+node redis {
+    label cache
+}
+
+node postgresql {
+    database storage
+}
+node rabbitmq {
+    queue crossroad_type1
+    queue crossroad_type2
+}
+
+
+API -- redis : cache
+API -- postgresql : data_access
+API --- rabbitmq : publish
+prediction_worker === rabbitmq : listen
+prediction_worker == postgresql : data_access
+prediction_worker == redis : cache
+
+@enduml

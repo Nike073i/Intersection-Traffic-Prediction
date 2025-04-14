@@ -1,0 +1,11 @@
+@startuml components
+left to right direction
+
+Broker <.. [Worker] : listen
+[API] ..> Broker : publish
+DataAccess -- [Worker]
+DataAccess -- [API]
+[Worker] -- [Regression]
+[Worker] -- [Classification]
+
+@enduml

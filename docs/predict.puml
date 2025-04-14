@@ -1,0 +1,28 @@
+@startuml predict
+
+actor Пользователь as User
+boundary    API    as API
+boundary    Worker    as Worker
+database    Database    as Database
+queue       Queue       as Queue
+collections Cache as Cache
+
+User-> API : Выполнить прогноз по перекрестку Х
+API -> Cache
+
+alt Прогноз есть в кеше
+    API -> User: Идентификатор прогноза
+
+else Прогноз еще не выполнялся
+    API -> Queue: Добавить задачу прогноза по перекрестку X
+    API -> Cache: Установить статус прогноза
+    API -> User: Идентификатор прогноза
+    
+    Queue -> Worker: Задача прогноза по перекрестку Х
+    Worker -> Database: Данные по перекрестку X
+    Worker -> Worker: Выполнить прогноз
+    Worker -> Cache: Обновить статус прогноза
+
+end
+
+@enduml

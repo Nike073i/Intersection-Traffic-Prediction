@@ -1,0 +1,34 @@
+@startuml users
+left to right direction
+
+entity crossroad_timeseries {
+    *Id: uuid
+    CrossroadId: int
+    Time: string,
+    Date: int,
+    DayOfTheWeek: string,
+    CarCount: int,
+    BikeCount: int,
+    BusCount: int,
+    TruckCount: int,
+    Total: int,
+    TrafficSituation: string
+}
+
+entity crossroads {
+    *Id: int
+    Type: string
+}
+
+entity crossroad_predictions {
+    *PredictionId: string
+    CrossroadId: int,
+    Time: datetime[],
+    Situations: int[]
+}
+
+
+crossroads ||..o{ crossroad_timeseries
+crossroads ||..o{ crossroad_predictions
+
+@enduml
